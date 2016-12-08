@@ -114,7 +114,7 @@ void fsmb_largefile_benchmark(int block_size, int count){
 		TIMER_START();
 
 		read_file_size = 0;
-		while (tot_file_size < read_file_size) {
+		while (tot_file_size > read_file_size) {
 			// Read data
 			error_flag = ReadFile(file_handle,	// file handle to read
 				buf,							// read buffer
