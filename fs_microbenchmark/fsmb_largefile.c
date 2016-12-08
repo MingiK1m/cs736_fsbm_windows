@@ -44,6 +44,9 @@ void fsmb_largefile_benchmark(int block_size, int count){
 	unsigned long long block_count = LARGE_FILE_SIZE/block_size;
 
 	buf = (char*)malloc(sizeof(char)*BUF_SIZE);
+	for (int i = 0; i < BUF_SIZE; i++) {
+		buf[i] = i % 2;
+	}
 	rand_seq = (unsigned long long*)malloc(block_count * sizeof(unsigned long long));
 
     printf("micro benchmarking for one big file RW\n");
@@ -104,6 +107,12 @@ void fsmb_largefile_benchmark(int block_size, int count){
 			tot_file_size += dwRetBytes;
 		}
 
+		error_flag = FlushFileBuffers(file_handle);
+		if (error_flag == FALSE) {
+			printf("Failed to flush file\n");
+			exit(1);
+		}
+
 		TIMER_END();
 
 		sec = TIMER_ELAPSE_SEC();
@@ -111,6 +120,16 @@ void fsmb_largefile_benchmark(int block_size, int count){
 		printf("%f \t", sec);
 
 		/*** Second phase ***/
+		// reset the file pointer
+		dwRetBytes = SetFilePointer(file_handle,
+			0,
+			NULL,
+			FILE_BEGIN);
+		if (dwRetBytes == INVALID_SET_FILE_POINTER) {
+			printf("Failed to set file pointer\n");
+			exit(1);
+		}
+
 		TIMER_START();
 
 		read_file_size = 0;
@@ -190,6 +209,12 @@ void fsmb_largefile_benchmark(int block_size, int count){
 				printf("Failed to write a block\n");
 				exit(1);
 			}
+		}
+
+		error_flag = FlushFileBuffers(file_handle);
+		if (error_flag == FALSE) {
+			printf("Failed to flush file\n");
+			exit(1);
 		}
 
 		TIMER_END();

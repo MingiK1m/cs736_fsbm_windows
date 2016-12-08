@@ -27,6 +27,9 @@ void fsmb_smallfile_benchmark(long block_size, int count){
     double sec;
 
 	buf = (char*)malloc(sizeof(char)*BUF_SIZE);
+	for (int i = 0; i < BUF_SIZE; i++) {
+		buf[i] = i % 2;
+	}
 
     printf("micro benchmarking for lots of small files RW\n");
 	printf("Opn/Wrt | Opn/Rd | Del\n");
@@ -61,6 +64,12 @@ void fsmb_smallfile_benchmark(long block_size, int count){
 
 			if (error_flag == FALSE || dwRetBytes != block_size) {
 				printf("Failed to write a block\n");
+				exit(1);
+			}
+
+			error_flag = FlushFileBuffers(file_handle);
+			if (error_flag == FALSE) {
+				printf("Failed to flush file\n");
 				exit(1);
 			}
 
