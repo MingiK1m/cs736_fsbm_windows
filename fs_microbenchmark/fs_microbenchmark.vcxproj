@@ -142,11 +142,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="fsmb_iocall.c" />
     <ClCompile Include="fsmb_largefile.c" />
     <ClCompile Include="fsmb_main.c" />
     <ClCompile Include="fsmb_smallfile.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="fsmb_iocall.h" />
     <ClInclude Include="fsmb_largefile.h" />
     <ClInclude Include="fsmb_smallfile.h" />
     <ClInclude Include="time_util.h" />

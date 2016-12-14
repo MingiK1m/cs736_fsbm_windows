@@ -24,6 +24,9 @@
     <ClCompile Include="fsmb_largefile.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="fsmb_iocall.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fsmb_smallfile.h">
@@ -33,6 +36,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="fsmb_largefile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fsmb_iocall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
